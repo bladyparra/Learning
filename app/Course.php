@@ -47,7 +47,7 @@ class Course extends Model
 		return $this->belongsTo(Category::class)->select('id', 'name');
 	}
 
-	public function goal (){
+	public function goals (){
 		return $this->hasMany(Goal::class)->select('id', 'course_id', 'goal');
 	}
 
