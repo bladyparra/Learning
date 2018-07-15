@@ -120,4 +120,15 @@ class Course extends Model
 	public function getCustomRatingAttribute(){
 		return $this->reviews->avg('rating');
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+	 */
+	public function relatedCourses () {
+		return Course::with('reviews')->whereCategoryId($this->category->id)
+			->where('id', '!=', $this->id)
+			->latest()
+			->limit(6)
+			->get();
+	}
 }
