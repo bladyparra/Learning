@@ -10,7 +10,7 @@ use App\Review;
 
 class CourseController extends Controller
 {
-    public function show (Course $course) {
+	public function show (Course $course) {
 		$course->load([
 			'category' => function ($q) {
 				$q->select('id', 'name');
@@ -31,15 +31,15 @@ class CourseController extends Controller
 		$related = $course->relatedCourses();
 
 		return view('courses.detail', compact('course', 'related'));
-    }
+	}
     
-    // public function inscribe (Course $course) {
-	// 	$course->students()->attach(auth()->user()->student->id);
+	public function inscribe (Course $course) {
+		$course->students()->attach(auth()->user()->student->id);
 
-	// 	\Mail::to($course->teacher->user)->send(new NewStudentInCourse($course, auth()->user()->name));
+		\Mail::to($course->teacher->user)->send(new NewStudentInCourse($course, auth()->user()->name));
 
-	// 	return back()->with('message', ['success', __("Inscrito correctamente al curso")]);
-	// }
+		return back()->with('message', ['success', __("Inscrito correctamente al curso")]);
+	}
 
 	public function subscribed () {
 		$courses = Course::whereHas('students', function($query) {
