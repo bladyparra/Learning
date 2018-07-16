@@ -47,10 +47,10 @@
 				@yield('content')
 		</main>
 		</div>
-		{{-- @include('partials.footer') --}}
+		@include('partials.footer')
 
 		<!-- Scripts -->
-		{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+		<script src="{{ asset('js/app.js') }}"></script>
 
 		@stack('scripts')
 	</body>
