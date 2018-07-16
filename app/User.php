@@ -40,7 +40,7 @@ use Laravel\Cashier\Billable;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Billable;
 
     protected static function boot () {
 		parent::boot();
