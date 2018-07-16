@@ -23,9 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Teacher whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Teacher whereWebsiteUrl($value)
  */
-class Teacher extends Model
-{
-    public function courses () {
+class Teacher extends Model{
+	protected $fillable = ['user_id'];
+	
+	public function courses () {
 		return $this->hasMany(Course::class);
 	}
 
