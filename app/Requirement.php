@@ -21,7 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Requirement extends Model
 {
-    public function course () {
+	protected $fillable = ['course_id', 'requirement'];
+	
+  public function course () {
 		return $this->belongsTo(Course::class);
 	}
 }

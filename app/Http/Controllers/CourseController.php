@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Helpers\Helper;
-use Illuminate\Http\RequestCourseRequest;
+use App\Http\Requests\CourseRequest;
 use App\Mail\NewStudentInCourse;
 use App\Review;
 
@@ -58,20 +58,20 @@ class CourseController extends Controller
 		return back()->with('message', ['success', __('Muchas gracias por valorar el curso')]);
 	}
 
-	// public function create () {
-	// 	$course = new Course;
-	// 	$btnText = __("Enviar curso para revisión");
-	// 	return view('courses.form', compact('course', 'btnText'));
-	// }
+	public function create () {
+		$course = new Course;
+		$btnText = __("Enviar curso para revisión");
+		return view('courses.form', compact('course', 'btnText'));
+	}
 
-	// public function store (CourseRequest $course_request) {
-	// 	$picture = Helper::uploadFile('picture', 'courses');
-	// 	$course_request->merge(['picture' => $picture]);
-	// 	$course_request->merge(['teacher_id' => auth()->user()->teacher->id]);
-	// 	$course_request->merge(['status' => Course::PENDING]);
-	// 	Course::create($course_request->input());
-	// 	return back()->with('message', ['success', __('Curso enviado correctamente, recibirá un correo con cualquier información')]);
-	// }
+	public function store (CourseRequest $course_request) {
+		$picture = Helper::uploadFile('picture', 'courses');
+		$course_request->merge(['picture' => $picture]);
+		$course_request->merge(['teacher_id' => auth()->user()->teacher->id]);
+		$course_request->merge(['status' => Course::PENDING]);
+		Course::create($course_request->input());
+		return back()->with('message', ['success', __('Curso enviado correctamente, recibirá un correo con cualquier información')]);
+	}
 
 	// public function edit ($slug) {
 	// 	$course = Course::with(['requirements', 'goals'])->withCount(['requirements', 'goals'])
