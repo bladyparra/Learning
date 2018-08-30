@@ -100,27 +100,27 @@
         return statuses[status];
       },
       updateStatus (row, newStatus) {
-        // this.processing = true;
-        // setTimeout(() => {
-        //   this.$http.post(
-        //     '/admin/courses/updateStatus',
-        //     {courseId: row.id, status: newStatus},
-        //     {
-        //       headers: {
-        //         x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content
-        //       }
-        //     }
-        //   )
-        //   .then(response => {
-        //     this.$refs.table.refresh();
-        //   })
-        //   .catch(error => {
+        this.processing = true;
+        setTimeout(() => {
+          this.$http.post(
+            '/admin/courses/updateStatus',
+            {courseId: row.id, status: newStatus},
+            {
+              headers: {
+                'x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content
+              }
+            }
+          )
+          .then(response => {
+            this.$refs.table.refresh();
+          })
+          .catch(error => {
 
-        //   })
-        //   .finally(() => {
-        //     this.processing = false;
-        //   });
-        // }, 1500);
+          })
+          .finally(() => {
+            this.processing = false;
+          });
+        }, 1500);
       }
     }
   }

@@ -60201,27 +60201,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return statuses[status];
     },
     updateStatus: function updateStatus(row, newStatus) {
-      // this.processing = true;
-      // setTimeout(() => {
-      //   this.$http.post(
-      //     '/admin/courses/updateStatus',
-      //     {courseId: row.id, status: newStatus},
-      //     {
-      //       headers: {
-      //         x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content
-      //       }
-      //     }
-      //   )
-      //   .then(response => {
-      //     this.$refs.table.refresh();
-      //   })
-      //   .catch(error => {
+      var _this = this;
 
-      //   })
-      //   .finally(() => {
-      //     this.processing = false;
-      //   });
-      // }, 1500);
+      this.processing = true;
+      setTimeout(function () {
+        _this.$http.post('/admin/courses/updateStatus', { courseId: row.id, status: newStatus }, {
+          headers: {
+            'x-csrf-token': document.head.querySelector('meta[name=csrf-token]').content
+          }
+        }).then(function (response) {
+          _this.$refs.table.refresh();
+        }).catch(function (error) {}).finally(function () {
+          _this.processing = false;
+        });
+      }, 1500);
     }
   }
 });
